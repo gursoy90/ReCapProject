@@ -54,8 +54,9 @@ namespace DataAccess.Concrete.InMemory
         {
             Car toDelete =null;
 
-            toDelete = _car.SingleOrDefault(c=> c.CarId ==car.CarId);
-            _car.Remove(toDelete);
+             toDelete = _car.SingleOrDefault(c => c.CarId == car.CarId);
+             _car.Remove(toDelete);
+          
         }
 
         public List<Car> GetAll()
@@ -64,9 +65,12 @@ namespace DataAccess.Concrete.InMemory
 
         }
 
-        public List<Car> GetById(int id)
+        public Car GetById(int id)
         {
-            return _car.Where(c=> c.CarId==id ).ToList();
+            // return _car.Where(c=> c.CarId==id ).ToList();
+            //return _car.Any(c => c.CarId == id);
+            return _car.Find(c => c.CarId == id);
+           
         }
 
         public void Update(Car car)

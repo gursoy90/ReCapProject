@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public void Delete(Car car)
         {
-            _inMemoryCarDal.Delete(car);
+           _inMemoryCarDal.Delete(car);
         }
 
         public List<Car> GetAll()
@@ -32,7 +32,7 @@ namespace Business.Concrete
             return _inMemoryCarDal.GetAll();
         }
 
-        public List<Car> GetById(int id)
+        public Car GetById(int id)
         {
              return _inMemoryCarDal.GetById(id);
         }
