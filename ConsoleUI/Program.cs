@@ -10,13 +10,9 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new InMemoryCarDal());
-           
-            foreach (var car in carManager.GetAll())
-            {
-                
-                Console.WriteLine(car.CarId + " " + car.Description);
-               
-            }
+
+
+            carManager.GetAll();
 
             Console.WriteLine("-----------------------------");
             Car car1 = new Car { CarId = 6, BrandId = 6, ColorId = 6, DailyPrice = 625, Description = " Yeni Gelen Dizel lüks Araç", ModelYear = "2020" };
@@ -33,7 +29,7 @@ namespace ConsoleUI
             Console.WriteLine("-----------------------------");
 
             carManager.Delete(car1);
-           
+
         }
     }
 }

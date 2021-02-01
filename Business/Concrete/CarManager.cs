@@ -27,9 +27,9 @@ namespace Business.Concrete
            _inMemoryCarDal.Delete(car);
         }
 
-        public List<Car> GetAll()
+        public void GetAll()
         {
-            return _inMemoryCarDal.GetAll();
+             _inMemoryCarDal.GetAll();
         }
 
         public Car GetById(int id)

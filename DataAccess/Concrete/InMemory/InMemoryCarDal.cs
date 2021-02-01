@@ -14,6 +14,7 @@ namespace DataAccess.Concrete.InMemory
         List<Car> _car;
         List<Brand> _brand;
         List<Color> _color;
+        
 
         public InMemoryCarDal()
         {
@@ -58,13 +59,6 @@ namespace DataAccess.Concrete.InMemory
              _car.Remove(toDelete);
           
         }
-
-        public List<Car> GetAll()
-        {
-            return _car;
-
-        }
-
         public Car GetById(int id)
         {
             // return _car.Where(c=> c.CarId==id ).ToList();
@@ -81,6 +75,26 @@ namespace DataAccess.Concrete.InMemory
             toUpdate.DailyPrice = car.DailyPrice;
             toUpdate.Description = car.Description;
             toUpdate.ModelYear = car.ModelYear;
+        }
+
+        public void GetAll()
+        {
+            //return _car;
+            
+            
+           var result = from b in _brand
+                         join c in _car
+                         on b.BrandId equals c.BrandId
+                         join col in _color on c.ColorId equals col.ColorId
+                         select new CarDto{ CarId = c.CarId, BrandName = b.BrandName, ModelType = b.ModelType, ColorName = col.ColorName, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, Description = c.Description };
+
+            foreach (var cars in result)
+            {
+                Console.WriteLine(cars.CarId + " " + cars.BrandName + " " + cars.ModelType + " " + cars.ColorName + " " + cars.ModelYear
+                    +" "+ cars.DailyPrice+ " " + cars.Description );
+            }
+
+
         }
     }
 }
