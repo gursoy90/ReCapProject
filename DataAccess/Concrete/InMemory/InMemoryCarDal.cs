@@ -57,6 +57,8 @@ namespace DataAccess.Concrete.InMemory
 
              toDelete = _car.SingleOrDefault(c => c.CarId == car.CarId);
              _car.Remove(toDelete);
+
+            Console.WriteLine("Id si "+toDelete.CarId + " olan Araç Silindi");
           
         }
         public Car GetById(int id)
