@@ -4,6 +4,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -24,16 +25,16 @@ namespace DataAccess.Concrete.InMemory
                 new Car {CarId=2,BrandId=2,ColorId=2,DailyPrice=550,Description="Dizel Araç",ModelYear="2020"},
                 new Car {CarId=3,BrandId=3,ColorId=3,DailyPrice=750,Description="Dizel Lüks Araç",ModelYear="2021"},
                 new Car {CarId=4,BrandId=4,ColorId=4,DailyPrice=250,Description="Benzinli Araç",ModelYear="2018"},
-                new Car {CarId=5,BrandId=5,ColorId=5,DailyPrice=450,Description="Benzinli Lüks Araç",ModelYear="2021"},
+                new Car {CarId=5,BrandId=5,ColorId=5,DailyPrice=450,Description="Benzinli Lüks Araç",ModelYear="2021"}
             };
 
             _brand = new List<Brand>
             {
-                new Brand {BrandId=1,BrandName="Opel Insignia",ModelType="Sedan"},
-                new Brand {BrandId=2,BrandName="Volkswagen Passat",ModelType="Sedan"},
-                new Brand {BrandId=3,BrandName="Mercedes E-200",ModelType="Sedan"},
-                new Brand {BrandId=4,BrandName="Opel Astra",ModelType="Hatcback"},
-                new Brand {BrandId=5,BrandName="BMW 320i",ModelType="Sedan"},
+                new Brand {BrandId=1,BrandName="Opel Insignia"},
+                new Brand {BrandId=2,BrandName="Volkswagen Passat"},
+                new Brand {BrandId=3,BrandName="Mercedes E-200"},
+                new Brand {BrandId=4,BrandName="Opel Astra"},
+                new Brand {BrandId=5,BrandName="BMW 320i"}
             };
             
 
@@ -61,12 +62,28 @@ namespace DataAccess.Concrete.InMemory
             Console.WriteLine("Id si "+toDelete.CarId + " olan Araç Silindi");
           
         }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Car GetById(int id)
         {
             // return _car.Where(c=> c.CarId==id ).ToList();
             //return _car.Any(c => c.CarId == id);
             return _car.Find(c => c.CarId == id);
            
+        }
+
+        public Car GetCarsByBrandId(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car GetCarsByColorId(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
@@ -79,24 +96,6 @@ namespace DataAccess.Concrete.InMemory
             toUpdate.ModelYear = car.ModelYear;
         }
 
-        public void GetAll()
-        {
-            //return _car;
-            
-            
-           var result = from b in _brand
-                         join c in _car
-                         on b.BrandId equals c.BrandId
-                         join col in _color on c.ColorId equals col.ColorId
-                         select new CarDto{ CarId = c.CarId, BrandName = b.BrandName, ModelType = b.ModelType, ColorName = col.ColorName, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, Description = c.Description };
-
-            foreach (var cars in result)
-            {
-                Console.WriteLine(cars.CarId + " " + cars.BrandName + " " + cars.ModelType + " " + cars.ColorName + " " + cars.ModelYear
-                    +" "+ cars.DailyPrice+ " " + cars.Description );
-            }
-
-
-        }
+        
     }
 }

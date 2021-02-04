@@ -6,13 +6,9 @@ using System.Text;
 
 namespace Business.Abstract
 {
-     public interface ICarService
+     public interface ICarService:IDataAccessRepository<Car>
     {
-        void GetAll();
-        void Add(Car car);
-        void Delete(Car car);
-        void Update(Car car);
-        Car GetById(int id);        
+       
     }
 
 }

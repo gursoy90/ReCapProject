@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
 using Entities.Concrete;
 using System;
@@ -10,36 +11,48 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _inMemoryCarDal;
+        ICarDal _carDal;
 
-        public CarManager(ICarDal inMemoryCarDal)
+        public CarManager(ICarDal cardal)
         {
-            _inMemoryCarDal = inMemoryCarDal;
+            _carDal = cardal;
+        }
+        public void Add(Car entity)
+        {
+            if (entity.DailyPrice>0)
+            {
+                _carDal.Add(entity);
+            }
+            else
+            {
+                Console.WriteLine("Eklenen Aracın Günlük Tutarı Sıfır olamaz");
+            }
+            
         }
 
-        public void Add(Car car)
+        public void Delete(Car entity)
         {
-            _inMemoryCarDal.Add(car);
+            _carDal.Delete(entity);
         }
 
-        public void Delete(Car car)
+        public List<Car> GetAll()
         {
-           _inMemoryCarDal.Delete(car);
+            return _carDal.GetAll();
         }
 
-        public void GetAll()
+        public List<Car> GetCarsByBrandId(int id)
         {
-             _inMemoryCarDal.GetAll();
+            return _carDal.GetAll(c=> c.BrandId==id);
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByColorId(int id)
         {
-             return _inMemoryCarDal.GetById(id);
+            return _carDal.GetAll(c => c.ColorId == id);
         }
 
-        public void Update(Car car)
+        public void Update(Car entity)
         {
-            _inMemoryCarDal.Update(car);
+            _carDal.Update(entity);
         }
     }
 }
