@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,61 +11,22 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFCarDal : ICarDal
+    public class EFCarDal : EfEntityRepositoryBase<Car, MyProjectContext>, ICarDal
     {
-        
-        public void Add(Car entity)
+        public List<CarDetailDto> GetCarDetails()
         {
-            using (MyProjectContext context =new MyProjectContext())
+            using (MyProjectContext context = new MyProjectContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Car entity)
-        {
-            using (MyProjectContext context=new MyProjectContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-
-            }
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (MyProjectContext context=new MyProjectContext())
-            {
-                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
-            }
-        }
-
-        public Car GetCarsByBrandId(Expression<Func<Car, bool>> filter)
-        {
-            using (MyProjectContext context=new MyProjectContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-        }
-
-        public Car GetCarsByColorId(Expression<Func<Car, bool>> filter)
-        {
-            using (MyProjectContext context =new MyProjectContext())
-            {
-                return context.Set<Car>().SingleOrDefault(filter);
-            }
-        }
-
-        public void Update(Car entity)
-        {
-            using (MyProjectContext context= new MyProjectContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                var result = from b in context.Brand
+                             join c in context.Car
+                             on b.BrandId equals c.BrandId
+                             join cl in context.Color
+                             on c.ColorId equals cl.ColorId
+                             select new CarDetailDto
+                             {
+                                 CarId=c.CarId,BrandName=b.BrandName,ColorName=cl.ColorName,ModelYear=c.ModelYear,dailyPrice=c.DailyPrice
+                             };
+                return result.ToList(); 
             }
         }
     }

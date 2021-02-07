@@ -31,14 +31,11 @@ namespace Business.Concrete
             return _colorDal.GetAll();
         }
 
-       
-
-        public List<Color> GetCarsByColorId(int id)
+        public Color GetById(int id)
         {
-            return _colorDal.GetAll(c => c.ColorId == id);
+            return _colorDal.GetById(c=>c.ColorId==id);
         }
 
-        
         public void Update(Color entity)
         {
             _colorDal.Update(entity);

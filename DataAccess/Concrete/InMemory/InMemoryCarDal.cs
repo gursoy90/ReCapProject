@@ -1,6 +1,6 @@
 ﻿using DataAccess.Abstract;
-using Entities.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +74,16 @@ namespace DataAccess.Concrete.InMemory
             //return _car.Any(c => c.CarId == id);
             return _car.Find(c => c.CarId == id);
            
+        }
+
+        public Car GetById(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public Car GetCarsByBrandId(Expression<Func<Car, bool>> filter)
