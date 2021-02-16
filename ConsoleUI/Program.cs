@@ -12,7 +12,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-           // CarCrud();
+            //CarCrud();
 
             Console.WriteLine("---------------------------------------");
 
@@ -23,16 +23,16 @@ namespace ConsoleUI
 
             Console.WriteLine("---------------------------------------");
 
-            Rental rent1 = new Rental() { CarId = 1, CustomerId = 1, RentDate = DateTime.Now.Date.ToString("dd-MM-yyyy") };
+            Rental rent1 = new Rental() { CarId = 1, CustomerId = 1, RentDate = DateTime.Now.Date.ToString("dd-MM-yyyy"), ReturnDate = "15-02-2021" };
             RentalManager rentacar = new RentalManager(new EfRentalDal());
 
-            //rentacar.Add(rent1);
+            rentacar.Add(rent1);
 
             if (rentacar.GetAll().Success)
             {
                 foreach (var rental in rentacar.GetAll().Data)
                 {
-                    Console.WriteLine(rental.RentalId + " " + rental.RentDate);
+                    Console.WriteLine(rental.RentalId + " " + rental.RentDate+" " +rental.ReturnDate);
                 }
             }
             else
@@ -41,15 +41,24 @@ namespace ConsoleUI
             }
             
             Console.WriteLine("---------------------------------------");
-            
-            
-           
+
+
+
+
+            foreach (var car in rentacar.GetRentalDetails().Data)
+            {
+                Console.WriteLine("{0}-{1}-{2}-{3}-{4}-{5}", car.RentalId, car.CarName,  car.CarDescription, car.RentDate,car.ReturnDate,car.TotalPrice);
+            }
+
+
+
+
 
         }
 
         private static void BrandCrud()
         {
-            BrandManager brandManager = new BrandManager(new EFBrandDal());
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
 
             Brand newBrand = new Brand() { BrandName = "BMx" };
 
@@ -71,7 +80,7 @@ namespace ConsoleUI
 
         private static void ColorCrud()
         {
-            ColorManager colorManager = new ColorManager(new EFColorDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
 
             Color newColor = new Color() { ColorName = "Lacivert" };
 
@@ -93,7 +102,7 @@ namespace ConsoleUI
 
         private static void CarCrud()
         {
-            CarManager carManager = new CarManager(new EFCarDal());
+            CarManager carManager = new CarManager(new EfCarDal());
 
 
             foreach (var car in carManager.GetAll().Data)

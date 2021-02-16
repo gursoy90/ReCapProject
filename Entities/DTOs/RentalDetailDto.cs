@@ -10,10 +10,11 @@ namespace Entities.DTOs
         public int RentalId { get; set; }
         public string CarName { get; set; }
         public string CarDescription { get; set; }
-        public string CustomerName { get; set; }
+        public string CompanyName { get; set; }
         public string RentDate { get; set; }
         public string ReturnDate { get; set; }
         public double TotalPrice { get; set; }
+
 
 
     }

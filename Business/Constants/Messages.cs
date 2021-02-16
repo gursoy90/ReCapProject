@@ -26,6 +26,15 @@ namespace Business.Constants
         public static string CustomerDeleted = "Müşteri Silindi";
         public static string CustomerListed = "Müşteriler Listelendi";
         public static string CustomerUpdated = "Müşteri Güncellendi";
+        public static string BrandNameError = "Marka Adı Enaz 2 Karakter Olmalıdır";
+        public static string BrandAdded = "Marka Kaydedildi";
+        public static string BrandDeleted = "Marka Silindi";
+        public static string BrandListed = "<Markalar Listelendi";
+        public static string BrandUpdated = "Marka Güncellendi";
+        public static string ColorAdded = "Renk Kaydedildi";
+        public static string ColorDeleted = "Renk Silindi";
+        public static string ColorListed = "<Renkler Listelendi";
+        public static string ColorUpdated = "Renk Güncellendi";
 
 
     }

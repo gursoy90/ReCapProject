@@ -17,22 +17,20 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (MyProjectContext context =new MyProjectContext())
             {
-                var result = from c in context.Cars
-                             join r in context.Rentals
-                             on c.CarId equals r.CarId
-                             join cus in context.Customers
-                             on r.CustomerId equals cus.CustomerId
+                var result = from r in context.Rentals
+                             join c in context.Cars
+                             on r.CarId equals c.CarId                             
                              join b in context.Brands
                              on c.CarId equals b.BrandId
+                             
                              select new RentalDetailDto 
                              {
                                  RentalId=r.RentalId,
                                  CarName=b.BrandName,
-                                 CarDescription=c.Description,
-                                 CustomerName=cus.CustomerName,
+                                 CarDescription=c.Description,                                 
                                  RentDate=r.RentDate,
-                                 ReturnDate=r.ReturnDate,
-                                 TotalPrice=Convert.ToDouble(r.ReturnDate) - Convert.ToDouble(r.RentDate) *c.DailyPrice                            
+                                 ReturnDate=r.ReturnDate,  
+                                 
                              
                              };
 

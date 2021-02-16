@@ -21,7 +21,7 @@ namespace Business.Concrete
 
         public IResult Add(Rental entity)
         {
-            if (entity.ReturnDate!=null)
+            if (entity.ReturnDate==null)
             {
                 _rentalDal.Add(entity);
                 return new SuccessResult(Messages.RentalAdded);
