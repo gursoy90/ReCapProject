@@ -64,14 +64,14 @@ namespace ConsoleUI
 
             brandManager.Add(newBrand);
 
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandId + " " + brand.BrandName);
             }
             newBrand.BrandName = "BMC";
             brandManager.Update(newBrand);
-            Console.WriteLine(brandManager.GetById(1).BrandName);
-            foreach (var brand in brandManager.GetAll())
+            Console.WriteLine(brandManager.GetById(1).Data.BrandName);
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandId + " " + brand.BrandName);
             }
@@ -86,14 +86,14 @@ namespace ConsoleUI
 
             colorManager.Add(newColor);
 
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorId + " " + color.ColorName);
             }
             newColor.ColorName = "Mor";
             colorManager.Update(newColor);
-            Console.WriteLine(colorManager.GetById(1).ColorName);
-            foreach (var color in colorManager.GetAll())
+            Console.WriteLine(colorManager.GetById(1).Data.ColorName);
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorId + " " + color.ColorName);
             }
