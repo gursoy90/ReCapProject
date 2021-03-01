@@ -33,9 +33,12 @@ namespace Business.Constants
         public static string BrandUpdated = "Marka Güncellendi";
         public static string ColorAdded = "Renk Kaydedildi";
         public static string ColorDeleted = "Renk Silindi";
-        public static string ColorListed = "<Renkler Listelendi";
+        public static string ColorListed = "Renkler Listelendi";
         public static string ColorUpdated = "Renk Güncellendi";
-
-
+        public static string CarImageAdded="Araba Resmi Eklendi";
+        public static string CarImageUpdated = "Araba Resmi Güncellendi";
+        public static string CarImageDeleted = "Araba Resmi Silindi";
+        public static string CarImageListed = "Araba Resmi Listelendi";
+        public static string CarImagesLimitExceded="Bu Araç için Fotoğraf Limiti Aşıldı";
     }
 }
